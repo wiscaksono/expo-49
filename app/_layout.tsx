@@ -7,7 +7,7 @@ import {
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { useColorScheme, View } from "react-native";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -25,6 +25,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     Inter: require("../assets/fonts/Inter-Regular.ttf"),
+    interBold: require("../assets/fonts/Inter-Bold.ttf"),
+    interMedium: require("../assets/fonts/Inter-Medium.ttf"),
+    interSemiBold: require("../assets/fonts/Inter-SemiBold.ttf"),
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
