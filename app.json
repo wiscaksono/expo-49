@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "blue-bank",
+    "name": "Blue Bank",
     "slug": "blue-bank",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wiscaksono.blue-bank"
     },
     "android": {
       "adaptiveIcon": {

@@ -1,20 +1,16 @@
 import { StyleSheet } from "react-native";
-import { Link } from "expo-router";
 
-import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 
-export default function TabOneScreen() {
+export default function Auth() {
   return (
     <View style={styles.container}>
-      <Link href="/">hoime</Link>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.title}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos assumenda
+        architecto dolores cum! Voluptatibus soluta iure tempora blanditiis
+        optio! Obcaecati recusandae molestiae officia velit accusamus ea odio
+        esse dolorem praesentium.
+      </Text>
     </View>
   );
 }
