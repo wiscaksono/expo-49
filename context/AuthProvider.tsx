@@ -25,11 +25,11 @@ function useProtectedRoute(user: User | null) {
     const inAuthGroup = segments[0] === "auth";
 
     if (!user && !inAuthGroup) {
-      router.replace("/auth");
+      router.replace("/auth/onboarding/stepFive");
     }
 
     if (user && inAuthGroup) {
-      router.replace("/dashboard");
+      router.replace("/dashboard/home");
     }
   }, [user, segments]);
 }
