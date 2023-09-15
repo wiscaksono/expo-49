@@ -1,63 +1,46 @@
 import { StyleSheet } from "react-native";
 import { Image } from "react-native";
 import { Link } from "expo-router";
-import { SafeAreaView, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
-import { Text, View } from "../../components/Themed";
+import { Text, View } from "../../components/themed";
+import { Container } from "../../components/Container";
 import { BlueBankSM } from "../../assets/icons/blue-bank";
 import { TextBody, TextHeading } from "../../constants/TextStyles";
 import Colors from "../../constants/Colors";
 
-export default function Auth() {
+export default () => {
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-      }}
-    >
-      <View style={styles.container}>
-        <View style={styles.topContainer}>
-          <BlueBankSM />
-          <Link href="/auth/signIn" asChild>
-            <TouchableOpacity>
-              <Text style={styles.link}>Sign in</Text>
-            </TouchableOpacity>
-          </Link>
-        </View>
-        <View style={styles.content}>
-          <Image source={require("../../assets/images/getting-started.png")} />
-          <View style={styles.textWrapper}>
-            <Text style={TextHeading[1]}>Get $50 when you open an account</Text>
-            <Text style={styles.description}>
-              Enjoy the benefits of online banking by becoming a customer. Let’s
-              help you find the right account.
-            </Text>
-          </View>
-        </View>
-
-        <Link href="/auth/onboarding/stepOne" asChild>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => console.log("pressed")}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.buttonText}>Get Started</Text>
+    <Container>
+      <View style={styles.topContainer}>
+        <BlueBankSM />
+        <Link href="/auth/signIn" asChild>
+          <TouchableOpacity>
+            <Text style={styles.link}>Sign in</Text>
           </TouchableOpacity>
         </Link>
       </View>
-    </SafeAreaView>
+      <View style={styles.content}>
+        <Image source={require("../../assets/images/getting-started.png")} />
+        <View style={styles.textWrapper}>
+          <Text style={TextHeading[1]}>Get $50 when you open an account</Text>
+          <Text style={styles.description}>
+            Enjoy the benefits of online banking by becoming a customer. Let’s
+            help you find the right account.
+          </Text>
+        </View>
+      </View>
+
+      <Link href="/auth/onboarding/stepOne" asChild>
+        <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+          <Text style={styles.buttonText}>Get Started</Text>
+        </TouchableOpacity>
+      </Link>
+    </Container>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
-    paddingHorizontal: 24,
-  },
   topContainer: {
     flexDirection: "row",
     alignItems: "center",

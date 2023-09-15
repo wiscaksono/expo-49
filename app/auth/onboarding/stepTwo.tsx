@@ -1,9 +1,10 @@
-import { View, Text } from "../../../components/Themed";
+import { Container } from "../../../components/Container";
+import { Text } from "../../../components/themed";
 
 export default () => {
   return (
-    <View>
-      <Text>aaa</Text>
-    </View>
+    <Container>
+      <Text>STEP 2</Text>
+    </Container>
   );
 };

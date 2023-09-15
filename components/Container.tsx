@@ -1,24 +1,20 @@
-import { View } from "./Themed";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { View } from "../components/themed";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 type ContainerProps = {
   children: React.ReactNode;
-  headerComponent?: React.ReactNode;
-  footerComponent?: React.ReactNode;
 };
 
-export function Container({
-  children,
-  headerComponent,
-  footerComponent,
-}: ContainerProps) {
+export function Container({ children }: ContainerProps) {
   return (
     <View style={styles.container}>
-      {headerComponent}
-      <SafeAreaView style={styles.safeArea}>
-        <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+      <SafeAreaView
+        style={{
+          flex: 1,
+        }}
+      >
+        {children}
       </SafeAreaView>
-      {footerComponent}
     </View>
   );
 }
@@ -27,6 +23,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    paddingHorizontal: 20,
   },
   safeArea: {
     flex: 1,

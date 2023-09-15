@@ -7,6 +7,9 @@ export default () => {
       screenOptions={{
         headerShown: false,
       }}
-    />
+    >
+      <Stack.Screen name="started" />
+      <Stack.Screen name="signIn" />
+    </Stack>
   );
 };

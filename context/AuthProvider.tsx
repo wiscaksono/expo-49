@@ -39,9 +39,7 @@ export function AuthProvider({
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const [user, setUser] = useState<User | null>({
-    name: "aaa",
-  });
+  const [user, setUser] = useState<User | null>(null);
 
   useProtectedRoute(user);
 

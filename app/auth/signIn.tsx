@@ -1,42 +1,41 @@
-import { SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 
-import { View, TextInput, Text } from "../../components/Themed";
+import { View, Text, TextInput } from "../../components/themed";
+import { Container } from "../../components/Container";
 import { BlueBankLG } from "../../assets/icons/blue-bank";
 import { TextBody, TextHeading } from "../../constants/TextStyles";
 import Colors from "../../constants/Colors";
 
 export default function SignIn() {
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.title}>
-          <BlueBankLG />
-        </View>
+    <Container>
+      <View style={styles.title}>
+        <BlueBankLG />
+      </View>
 
-        <View style={styles.form}>
-          <Text style={TextHeading[2]}>Sign in</Text>
-          <TextInput label="Customer ID" />
-          <View>
-            <TextInput label="Password" secureTextEntry={true} />
-            <Link href="/" style={styles.forgotPassword}>
-              Forgot password?
-            </Link>
-          </View>
-          <Link href="/auth/signIn" asChild>
-            <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-              <Text style={styles.buttonText}>Sign in</Text>
-            </TouchableOpacity>
+      <View style={styles.form}>
+        <Text style={TextHeading[2]}>Sign in</Text>
+        <TextInput label="Customer ID" />
+        <View>
+          <TextInput label="Password" secureTextEntry={true} />
+          <Link href="/auth/signIn" style={styles.forgotPassword}>
+            Forgot password?
           </Link>
         </View>
-
-        <Link href="/auth/onboarding" asChild>
-          <TouchableOpacity style={styles.buttonOutline}>
-            <Text style={styles.buttonOutlineText}>Create Account</Text>
+        <Link href="/auth/signIn" asChild>
+          <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+            <Text style={styles.buttonText}>Sign in</Text>
           </TouchableOpacity>
         </Link>
-      </SafeAreaView>
-    </View>
+      </View>
+
+      <Link href="/auth/signIn" asChild>
+        <TouchableOpacity style={styles.buttonOutline}>
+          <Text style={styles.buttonOutlineText}>Create Account</Text>
+        </TouchableOpacity>
+      </Link>
+    </Container>
   );
 }
 

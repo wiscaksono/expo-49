@@ -1,5 +1,11 @@
 import { Tabs } from "expo-router";
 
 export default () => {
-  return <Tabs initialRouteName="home" />;
+  return (
+    <Tabs>
+      <Tabs.Screen name="home" />
+      <Tabs.Screen name="cards" />
+      <Tabs.Screen name="transfer" />
+    </Tabs>
+  );
 };

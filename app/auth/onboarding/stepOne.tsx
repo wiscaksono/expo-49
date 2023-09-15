@@ -1,20 +1,10 @@
-import { Text, View } from "../../../components/Themed";
+import { Container } from "../../../components/Container";
+import { Text } from "../../../components/themed";
 
-export default function Onboarding() {
+export default () => {
   return (
-    <View>
-      <Text>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores
-        obcaecati quam repellendus omnis quibusdam, iure sed sint, provident eos
-        sunt soluta architecto laborum at dolorem sequi harum accusantium!
-        Officia, quidem voluptas magni non illum nisi necessitatibus praesentium
-        ipsa ad? Accusamus, praesentium, atque Lorem, ipsum dolor sit amet
-        consectetur adipisicing elit. Maiores obcaecati quam repellendus omnis
-        quibusdam, iure sed sint, provident eos sunt soluta architecto laborum
-        at dolorem sequi harum accusantium! Officia, quidem voluptas magni non
-        illum nisi necessitatibus praesentium ipsa ad? Accusamus, praesentium,
-        atque
-      </Text>
-    </View>
+    <Container>
+      <Text>STEP 1</Text>
+    </Container>
   );
-}
+};
