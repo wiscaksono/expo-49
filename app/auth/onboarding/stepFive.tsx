@@ -9,19 +9,22 @@ import { Stepper } from "./components/stepper";
 import { RadioButton } from "../../../components/RadioButton";
 import { TextStyles } from "../../../constants";
 
-const options = ["Under 14", "14 - 17", "18 - 29", "30 - 54", "55 or over"];
+const options = [
+  "A short term or regular savings account",
+  "Something fixed with a guaranteed rate of retutrn without access to my funds",
+];
 
 export default () => {
   const [selected, setSelected] = useState("");
 
   return (
     <Container>
-      <Stepper currentStep={2} />
+      <Stepper currentStep={5} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.topWrapper}>
-          <Text style={styles.title}>What is your age?</Text>
+          <Text style={styles.title}>Recommended accounts</Text>
           <Text style={styles.desc}>
-            If you are opening an account for a child, please select their age.
+            This is based on the information you provided.
           </Text>
         </View>
         <View
@@ -30,16 +33,6 @@ export default () => {
           }}
         >
           <Text style={styles.label}>Select age</Text>
-          {options.map((option) => (
-            <RadioButton
-              key={option}
-              title={option}
-              isActive={selected === option}
-              onPress={() => {
-                selected === option ? setSelected("") : setSelected(option);
-              }}
-            />
-          ))}
         </View>
       </ScrollView>
 

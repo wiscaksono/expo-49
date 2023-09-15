@@ -9,41 +9,53 @@ import { Stepper } from "./components/stepper";
 import { RadioButton } from "../../../components/RadioButton";
 import { TextStyles } from "../../../constants";
 
-const options = ["Under 14", "14 - 17", "18 - 29", "30 - 54", "55 or over"];
+const options = [
+  {
+    title: "Savings",
+    desc: "Earning interest on my account balance",
+  },
+  {
+    title: "Everyday Transactions",
+    desc: "Depositing funds into everyday use with a debit card",
+  },
+  {
+    title: "Everyday transactions and savings",
+    desc: "Everyday use with debit card access for earning interest on savings",
+  },
+];
 
 export default () => {
   const [selected, setSelected] = useState("");
 
   return (
     <Container>
-      <Stepper currentStep={2} />
+      <Stepper currentStep={3} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.topWrapper}>
-          <Text style={styles.title}>What is your age?</Text>
-          <Text style={styles.desc}>
-            If you are opening an account for a child, please select their age.
-          </Text>
+          <Text style={styles.title}>Account type</Text>
+          <Text style={styles.desc}>Select the type of account you need.</Text>
         </View>
         <View
           style={{
             gap: 6,
           }}
         >
-          <Text style={styles.label}>Select age</Text>
-          {options.map((option) => (
+          <Text style={styles.label}>I need an account for</Text>
+          {options.map(({ title, desc }) => (
             <RadioButton
-              key={option}
-              title={option}
-              isActive={selected === option}
+              key={title}
+              title={title}
+              description={desc}
+              isActive={selected === title}
               onPress={() => {
-                selected === option ? setSelected("") : setSelected(option);
+                selected === title ? setSelected("") : setSelected(title);
               }}
             />
           ))}
         </View>
       </ScrollView>
 
-      <Link href="/auth/onboarding/stepThree" asChild>
+      <Link href="/auth/onboarding/stepFour" asChild>
         <TouchableOpacity
           style={{
             ...styles.button,

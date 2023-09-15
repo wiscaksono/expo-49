@@ -1,5 +1,5 @@
 import { Redirect } from "expo-router";
 
 export default () => {
-  return <Redirect href="/auth" />;
+  return <Redirect href="/auth/onboarding/stepOne" />;
 };

@@ -9,20 +9,21 @@ import { Stepper } from "./components/stepper";
 import { RadioButton } from "../../../components/RadioButton";
 import { TextStyles } from "../../../constants";
 
-const options = ["Under 14", "14 - 17", "18 - 29", "30 - 54", "55 or over"];
+const options = [
+  "A short term or regular savings account",
+  "Something fixed with a guaranteed rate of retutrn without access to my funds",
+];
 
 export default () => {
   const [selected, setSelected] = useState("");
 
   return (
     <Container>
-      <Stepper currentStep={2} />
+      <Stepper currentStep={4} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.topWrapper}>
-          <Text style={styles.title}>What is your age?</Text>
-          <Text style={styles.desc}>
-            If you are opening an account for a child, please select their age.
-          </Text>
+          <Text style={styles.title}>Savings type</Text>
+          <Text style={styles.desc}>Select a savings account</Text>
         </View>
         <View
           style={{
@@ -43,7 +44,7 @@ export default () => {
         </View>
       </ScrollView>
 
-      <Link href="/auth/onboarding/stepThree" asChild>
+      <Link href="/auth/onboarding/stepFive" asChild>
         <TouchableOpacity
           style={{
             ...styles.button,

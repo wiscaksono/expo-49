@@ -30,7 +30,7 @@ export default function SignIn() {
         </Link>
       </View>
 
-      <Link href="/auth/signIn" asChild>
+      <Link href="/auth/onboarding/stepOne" asChild>
         <TouchableOpacity style={styles.buttonOutline}>
           <Text style={styles.buttonOutlineText}>Create Account</Text>
         </TouchableOpacity>
