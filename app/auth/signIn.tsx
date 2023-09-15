@@ -23,14 +23,14 @@ export default function SignIn() {
               Forgot password?
             </Link>
           </View>
-          <Link href="/" asChild>
+          <Link href="/auth/signIn" asChild>
             <TouchableOpacity style={styles.button} activeOpacity={0.8}>
               <Text style={styles.buttonText}>Sign in</Text>
             </TouchableOpacity>
           </Link>
         </View>
 
-        <Link href="/(auth)/(onboarding)/" asChild>
+        <Link href="/auth/onboarding" asChild>
           <TouchableOpacity style={styles.buttonOutline}>
             <Text style={styles.buttonOutlineText}>Create Account</Text>
           </TouchableOpacity>

@@ -19,7 +19,7 @@ export default function Auth() {
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <BlueBankSM />
-          <Link href="/signIn" asChild>
+          <Link href="/auth/signIn" asChild>
             <TouchableOpacity>
               <Text style={styles.link}>Sign in</Text>
             </TouchableOpacity>
@@ -36,7 +36,7 @@ export default function Auth() {
           </View>
         </View>
 
-        <Link href="/(auth)/(onboarding)/" asChild>
+        <Link href="/auth/onboarding/stepOne" asChild>
           <TouchableOpacity
             style={styles.button}
             onPress={() => console.log("pressed")}
