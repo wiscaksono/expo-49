@@ -98,7 +98,7 @@ export default () => {
         </View>
       </ScrollView>
 
-      <Link href="/auth/onboarding/stepThree" asChild>
+      <Link href="/auth/personalDetail/stepOne" asChild>
         <TouchableOpacity
           style={{
             ...styles.button,
