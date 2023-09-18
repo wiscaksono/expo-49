@@ -7,9 +7,6 @@ export default () => {
       screenOptions={{
         headerShown: false,
       }}
-    >
-      <Stack.Screen name="stepOne" />
-      <Stack.Screen name="stepTwo" />
-    </Stack>
+    />
   );
 };

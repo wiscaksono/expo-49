@@ -1,8 +1,9 @@
 import { useSegments, useRouter } from "expo-router";
 import { createContext, useContext, useEffect, useState } from "react";
 
-type User = {
-  name: string;
+export type User = {
+  email: string;
+  password: string;
 };
 
 type AuthType = {
@@ -25,7 +26,7 @@ function useProtectedRoute(user: User | null) {
     const inAuthGroup = segments[0] === "auth";
 
     if (!user && !inAuthGroup) {
-      router.replace("/auth/personalDetail/stepTwo");
+      router.replace("/auth/started");
     }
 
     if (user && inAuthGroup) {

@@ -1,34 +1,59 @@
+import { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
+
+import { KeyboardAvoidingView } from "../../components/themed";
+import { useAuth, User } from "../../context/AuthProvider";
+import { TextBody, TextHeading } from "../../constants/TextStyles";
+import Colors from "../../constants/Colors";
 
 import { View, Text, TextInput } from "../../components/themed";
 import { Container } from "../../components/Container";
 import { BlueBankLG } from "../../assets/icons/blue-bank";
-import { TextBody, TextHeading } from "../../constants/TextStyles";
-import Colors from "../../constants/Colors";
 
 export default function SignIn() {
+  const [values, setValues] = useState<User>({
+    email: "wwicaksono96@gmail.com",
+    password: "12345678",
+  });
+
+  const { setUser } = useAuth();
+
   return (
     <Container>
       <View style={styles.title}>
         <BlueBankLG />
       </View>
 
-      <View style={styles.form}>
+      <KeyboardAvoidingView style={styles.form}>
         <Text style={TextHeading[2]}>Sign in</Text>
-        <TextInput label="Customer ID" />
+        <TextInput
+          label="Customer ID"
+          keyboardType="email-address"
+          value={values.email}
+          onChangeText={(text) => setValues({ ...values, email: text })}
+        />
         <View>
-          <TextInput label="Password" secureTextEntry={true} />
+          <TextInput
+            label="Password"
+            secureTextEntry={true}
+            value={values.password}
+            onChangeText={(text) => setValues({ ...values, password: text })}
+          />
           <Link href="/auth/signIn" style={styles.forgotPassword}>
             Forgot password?
           </Link>
         </View>
         <Link href="/auth/signIn" asChild>
-          <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => setUser(values)}
+          >
             <Text style={styles.buttonText}>Sign in</Text>
           </TouchableOpacity>
         </Link>
-      </View>
+      </KeyboardAvoidingView>
 
       <Link href="/auth/onboarding/stepOne" asChild>
         <TouchableOpacity style={styles.buttonOutline}>

@@ -19,7 +19,7 @@ import {
 export type PersonalDetailStepOneParams = {
   tile: string;
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   email: string;
   phone: string;
@@ -27,12 +27,12 @@ export type PersonalDetailStepOneParams = {
 
 export default () => {
   const [values, setValues] = useState<PersonalDetailStepOneParams>({
-    tile: "",
-    firstName: "",
+    tile: "Mr",
+    firstName: "Wisnu",
     middleName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    lastName: "Wicaksono",
+    email: "wwicaksono96@gmail.com",
+    phone: "+6287885002327",
   });
 
   const validate =
@@ -60,6 +60,7 @@ export default () => {
             <View>
               <TextInput
                 label="First name"
+                value={values.firstName}
                 onChangeText={(value) =>
                   setValues({
                     ...values,
@@ -80,6 +81,7 @@ export default () => {
             </View>
             <TextInput
               label="Middle name (optional)"
+              value={values.middleName}
               onChangeText={(value) =>
                 setValues({
                   ...values,
@@ -89,6 +91,7 @@ export default () => {
             />
             <TextInput
               label="Last name"
+              value={values.lastName}
               onChangeText={(value) =>
                 setValues({
                   ...values,
@@ -102,6 +105,7 @@ export default () => {
             <TextInput
               label="Email address"
               keyboardType="email-address"
+              value={values.email}
               onChangeText={(value) =>
                 setValues({
                   ...values,
@@ -113,6 +117,7 @@ export default () => {
               label="Mobile number"
               inputMode="tel"
               keyboardType="phone-pad"
+              value={values.phone}
               onChangeText={(value) =>
                 setValues({
                   ...values,

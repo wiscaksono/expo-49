@@ -1,21 +1,38 @@
-import { StyleSheet, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useState, useEffect } from "react";
+import { StyleSheet, ActivityIndicator } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 import Colors from "../../../constants/Colors";
 import { TextStyles } from "../../../constants";
 
 import { Stepper } from "./components/stepper";
+import { OTPInput } from "./components/OTPInput";
 import { Container } from "../../../components/Container";
-import { Text, View, TextInput } from "../../../components/themed";
+import { Text, View } from "../../../components/themed";
 import { PersonalDetailStepOneParams } from "./stepOne";
 
 export default () => {
   const { phone } = useLocalSearchParams<PersonalDetailStepOneParams>();
+  const { push } = useRouter();
 
-  return (
-    <Container>
-      <Stepper />
-      <ScrollView showsVerticalScrollIndicator={false}>
+  const [otpCode, setOtpCode] = useState("");
+  const [isPinReady, setIsPinReady] = useState(false);
+
+  useEffect(() => {
+    if (isPinReady) {
+      setTimeout(() => {
+        push("/auth/personalDetail/stepThree");
+      }, 1000);
+    }
+  }, [isPinReady]);
+
+  return isPinReady ? (
+    <Loading />
+  ) : (
+    <>
+      <Container>
+        <Stepper />
+
         <View style={styles.topWrapper}>
           <Text style={styles.title}>
             Enter the 4-digit code sent to you at
@@ -23,9 +40,28 @@ export default () => {
           <Text style={styles.desc}>{phone}</Text>
         </View>
 
-        <TextInput label="aaa" value="" />
-      </ScrollView>
-    </Container>
+        <OTPInput
+          code={otpCode}
+          setCode={setOtpCode}
+          maximumCodeLength={4}
+          setIsPinReady={setIsPinReady}
+        />
+      </Container>
+    </>
+  );
+};
+
+const Loading = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <ActivityIndicator />
+    </View>
   );
 };
 
