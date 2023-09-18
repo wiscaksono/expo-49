@@ -1,13 +1,47 @@
 import { Link } from "expo-router";
+import { useState } from "react";
 import { TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 
 import Colors from "../../../constants/Colors";
-import { Container } from "../../../components/Container";
-import { Text, View } from "../../../components/themed";
-import { Stepper } from "./components/stepper";
 import { TextStyles } from "../../../constants";
+import { TILE_OPTIONS } from "../../../data";
+
+import { Stepper } from "./components/stepper";
+import { Select } from "../../../components/Select";
+import { Container } from "../../../components/Container";
+import {
+  Text,
+  View,
+  TextInput,
+  KeyboardAvoidingView,
+} from "../../../components/themed";
+
+export type PersonalDetailStepOneParams = {
+  tile: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+};
 
 export default () => {
+  const [values, setValues] = useState<PersonalDetailStepOneParams>({
+    tile: "",
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
+
+  const validate =
+    !!values.tile &&
+    !!values.firstName &&
+    !!values.lastName &&
+    !!values.email &&
+    !!values.phone;
+
   return (
     <Container>
       <Stepper />
@@ -15,14 +49,93 @@ export default () => {
         <View style={styles.topWrapper}>
           <Text style={styles.title}>Your details</Text>
           <Text style={styles.desc}>Let's start with your details.</Text>
+
+          <KeyboardAvoidingView style={styles.form}>
+            <Select
+              label="Tile"
+              list={TILE_OPTIONS}
+              selected={values.tile}
+              onSelect={(value) => setValues({ ...values, tile: value })}
+            />
+            <View>
+              <TextInput
+                label="First name"
+                onChangeText={(value) =>
+                  setValues({
+                    ...values,
+                    firstName: value,
+                  })
+                }
+              />
+              <Text
+                style={{
+                  ...TextStyles.TextBody[3],
+                  color: Colors.neutral["50"],
+                  marginTop: 4,
+                }}
+              >
+                To help us verify your identity online, please enter your name
+                exactly as it appears on your ID
+              </Text>
+            </View>
+            <TextInput
+              label="Middle name (optional)"
+              onChangeText={(value) =>
+                setValues({
+                  ...values,
+                  middleName: value,
+                })
+              }
+            />
+            <TextInput
+              label="Last name"
+              onChangeText={(value) =>
+                setValues({
+                  ...values,
+                  lastName: value,
+                })
+              }
+            />
+
+            <View style={styles.divider} />
+
+            <TextInput
+              label="Email address"
+              keyboardType="email-address"
+              onChangeText={(value) =>
+                setValues({
+                  ...values,
+                  email: value,
+                })
+              }
+            />
+            <TextInput
+              label="Mobile number"
+              inputMode="tel"
+              keyboardType="phone-pad"
+              onChangeText={(value) =>
+                setValues({
+                  ...values,
+                  phone: value,
+                })
+              }
+            />
+          </KeyboardAvoidingView>
         </View>
       </ScrollView>
-
-      <Link href="/auth/onboarding/stepTwo" asChild>
+      <Link
+        href={{
+          pathname: "/auth/personalDetail/stepTwo",
+          params: values,
+        }}
+        asChild
+      >
         <TouchableOpacity
           style={{
             ...styles.button,
+            opacity: validate ? 1 : 0.5,
           }}
+          disabled={!validate}
           activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>Continue</Text>
@@ -53,6 +166,15 @@ const styles = StyleSheet.create({
   },
   label: {
     ...TextStyles.TextBody["2-sb"],
+  },
+  form: {
+    marginTop: 24,
+    gap: 24,
+  },
+  divider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: Colors.neutral[90],
   },
   buttonText: {
     color: "white",

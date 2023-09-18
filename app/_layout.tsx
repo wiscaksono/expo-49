@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { AuthProvider } from "../context/AuthProvider";
@@ -32,16 +33,18 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <Stack
-        initialRouteName="dashboard"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="dashboard" />
-        <Stack.Screen name="auth" />
-      </Stack>
-    </AuthProvider>
+    <BottomSheetModalProvider>
+      <AuthProvider>
+        <Stack
+          initialRouteName="dashboard"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="dashboard" />
+          <Stack.Screen name="auth" />
+        </Stack>
+      </AuthProvider>
+    </BottomSheetModalProvider>
   );
 }

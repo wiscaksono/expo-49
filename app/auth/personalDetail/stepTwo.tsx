@@ -1,60 +1,30 @@
-import { Link } from "expo-router";
-import { useState } from "react";
-import { TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 
 import Colors from "../../../constants/Colors";
-import { Container } from "../../../components/Container";
-import { Text, View } from "../../../components/themed";
-import { Stepper } from "./components/stepper";
-import { RadioButton } from "../../../components/RadioButton";
 import { TextStyles } from "../../../constants";
 
-const options = ["Under 14", "14 - 17", "18 - 29", "30 - 54", "55 or over"];
+import { Stepper } from "./components/stepper";
+import { Container } from "../../../components/Container";
+import { Text, View, TextInput } from "../../../components/themed";
+import { PersonalDetailStepOneParams } from "./stepOne";
 
 export default () => {
-  const [selected, setSelected] = useState("");
+  const { phone } = useLocalSearchParams<PersonalDetailStepOneParams>();
 
   return (
     <Container>
-      <Stepper currentStep={2} />
+      <Stepper />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.topWrapper}>
-          <Text style={styles.title}>What is your age?</Text>
-          <Text style={styles.desc}>
-            If you are opening an account for a child, please select their age.
+          <Text style={styles.title}>
+            Enter the 4-digit code sent to you at
           </Text>
+          <Text style={styles.desc}>{phone}</Text>
         </View>
-        <View
-          style={{
-            gap: 6,
-          }}
-        >
-          <Text style={styles.label}>Select age</Text>
-          {options.map((option) => (
-            <RadioButton
-              key={option}
-              title={option}
-              isActive={selected === option}
-              onPress={() => {
-                selected === option ? setSelected("") : setSelected(option);
-              }}
-            />
-          ))}
-        </View>
-      </ScrollView>
 
-      <Link href="/auth/onboarding/stepThree" asChild>
-        <TouchableOpacity
-          style={{
-            ...styles.button,
-            opacity: selected ? 1 : 0.5,
-          }}
-          activeOpacity={0.8}
-          disabled={!selected}
-        >
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-      </Link>
+        <TextInput label="aaa" value="" />
+      </ScrollView>
     </Container>
   );
 };
@@ -80,6 +50,15 @@ const styles = StyleSheet.create({
   },
   label: {
     ...TextStyles.TextBody["2-sb"],
+  },
+  form: {
+    marginTop: 24,
+    gap: 24,
+  },
+  divider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: Colors.neutral[90],
   },
   buttonText: {
     color: "white",
