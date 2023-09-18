@@ -13,7 +13,7 @@ type AuthType = {
 
 const AuthContext = createContext<AuthType>({
   user: null,
-  setUser: () => {},
+  setUser: () => { },
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -26,7 +26,7 @@ function useProtectedRoute(user: User | null) {
     const inAuthGroup = segments[0] === "auth";
 
     if (!user && !inAuthGroup) {
-      router.replace("/auth/verifyIdentity/stepOne");
+      router.replace("/auth/verifyIdentity/stepTwo");
     }
 
     if (user && inAuthGroup) {

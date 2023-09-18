@@ -1,14 +1,28 @@
 import { Link } from "expo-router";
+import { useState } from "react";
 import { TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 
 import Colors from "../../../constants/Colors";
 import { TextStyles } from "../../../constants";
 
 import { Stepper } from "./components/stepper";
+import { Select } from "../../../components/Select";
 import { Container } from "../../../components/Container";
-import { Text, View, TextInput } from "../../../components/themed";
+import { Text, View } from "../../../components/themed";
+
+const verificationMethod = [
+  "Driver Lisence",
+  "Passport",
+  "Medicare Card",
+  "Photo ID ",
+];
 
 export default () => {
+  const [values, setValues] = useState({
+    verificationMethod: "",
+    secondVerificationMethod: "",
+  });
+
   return (
     <Container>
       <Stepper currentStep={2} />
@@ -16,32 +30,38 @@ export default () => {
         <View style={styles.topWrapper}>
           <Text style={styles.title}>Verify your identity</Text>
           <Text style={styles.desc}>
-            We need two ID documents to verify your identity.
+            We need two ID documents to verify your identity
           </Text>
 
           <View style={styles.form}>
-            <TextInput label="Date of birth" />
-            <View>
-              <TextInput label="Home address" />
-              <Text
-                style={{
-                  ...TextStyles.TextBody[3],
-                  color: Colors.neutral["50"],
-                  marginTop: 4,
-                }}
-              >
-                e.g. 123 Bluebank St, London, E1 6LT
-              </Text>
-            </View>
+            <Select
+              label="Select verification method"
+              selected={values.verificationMethod}
+              list={verificationMethod}
+              onSelect={(value) =>
+                setValues({ ...values, verificationMethod: value })
+              }
+            />
+
+            <View style={styles.divider} />
+
+            <Select
+              label="Select second verification method"
+              selected={values.verificationMethod}
+              list={verificationMethod}
+              onSelect={(value) =>
+                setValues({ ...values, secondVerificationMethod: value })
+              }
+            />
           </View>
         </View>
       </ScrollView>
       <Link href="/auth/verifyIdentity/stepTwo" asChild>
         <TouchableOpacity
+          activeOpacity={0.8}
           style={{
             ...styles.button,
           }}
-          activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
@@ -74,7 +94,7 @@ const styles = StyleSheet.create({
   },
   form: {
     marginTop: 24,
-    gap: 24,
+    gap: 48,
   },
   divider: {
     height: 1,

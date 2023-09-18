@@ -8,6 +8,7 @@ import { TextStyles } from "../../../constants";
 import { Stepper } from "./components/stepper";
 import { Container } from "../../../components/Container";
 import { RadioButton } from "../../../components/RadioButton";
+import { DPicker } from "../../../components/DatePicker";
 import {
   Text,
   View,
@@ -17,8 +18,18 @@ import {
 
 const options = ["Send to home address", "Add another address"];
 
+type StepOneValues = {
+  dob: Date | null;
+  address: string;
+  debitToSend: string;
+};
+
 export default () => {
-  const [selected, setSelected] = useState(options[0]);
+  const [values, setValues] = useState<StepOneValues>({
+    dob: null,
+    address: "",
+    debitToSend: "",
+  });
 
   return (
     <Container>
@@ -31,7 +42,11 @@ export default () => {
           </Text>
 
           <KeyboardAvoidingView style={styles.form}>
-            <TextInput label="Date of birth" />
+            <DPicker
+              label="Date of birth"
+              date={values.dob}
+              onChange={(val) => setValues({ ...values, dob: val })}
+            />
             <View>
               <TextInput label="Home address" />
               <Text
@@ -54,11 +69,11 @@ export default () => {
                   <RadioButton
                     key={option}
                     title={option}
-                    isActive={selected === option}
+                    isActive={values.debitToSend === option}
                     onPress={() => {
-                      selected === option
-                        ? setSelected("")
-                        : setSelected(option);
+                      values.debitToSend === option
+                        ? setValues({ ...values, debitToSend: "" })
+                        : setValues({ ...values, debitToSend: option });
                     }}
                   />
                 ))}
@@ -69,10 +84,10 @@ export default () => {
       </ScrollView>
       <Link href="/auth/verifyIdentity/stepTwo" asChild>
         <TouchableOpacity
+          activeOpacity={0.8}
           style={{
             ...styles.button,
           }}
-          activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
