@@ -26,7 +26,7 @@ function useProtectedRoute(user: User | null) {
     const inAuthGroup = segments[0] === "auth";
 
     if (!user && !inAuthGroup) {
-      router.replace("/auth/personalDetail/stepThree");
+      router.replace("/auth/started");
     }
 
     if (user && inAuthGroup) {
@@ -40,7 +40,10 @@ export function AuthProvider({
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>({
+    email: "wwicaksono96@gmail.com",
+    password: "Wisnuajjh123",
+  });
 
   useProtectedRoute(user);
 

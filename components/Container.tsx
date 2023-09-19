@@ -3,9 +3,10 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 type ContainerProps = {
   children: React.ReactNode;
+  isDashboard?: boolean;
 };
 
-export function Container({ children }: ContainerProps) {
+export function Container({ children, isDashboard }: ContainerProps) {
   return (
     <View style={styles.container}>
       <SafeAreaView
