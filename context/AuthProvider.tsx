@@ -26,7 +26,7 @@ function useProtectedRoute(user: User | null) {
     const inAuthGroup = segments[0] === "auth";
 
     if (!user && !inAuthGroup) {
-      router.replace("/auth/verifyIdentity/stepTwo");
+      router.replace("/auth/verifyIdentity/final");
     }
 
     if (user && inAuthGroup) {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, ActivityIndicator } from "react-native";
+import { StyleSheet } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 import Colors from "../../../constants/Colors";
@@ -9,6 +9,7 @@ import { Stepper } from "./components/stepper";
 import { OTPInput } from "./components/OTPInput";
 import { Container } from "../../../components/Container";
 import { Text, View } from "../../../components/themed";
+import { ScreenLoader } from "../../../components/ScreenLoader";
 import { PersonalDetailStepOneParams } from "./stepOne";
 
 export default () => {
@@ -26,42 +27,26 @@ export default () => {
     }
   }, [isPinReady]);
 
-  return isPinReady ? (
-    <Loading />
-  ) : (
-    <>
-      <Container>
-        <Stepper />
+  if (isPinReady) {
+    return <ScreenLoader />;
+  }
 
-        <View style={styles.topWrapper}>
-          <Text style={styles.title}>
-            Enter the 4-digit code sent to you at
-          </Text>
-          <Text style={styles.desc}>{phone}</Text>
-        </View>
-
-        <OTPInput
-          code={otpCode}
-          setCode={setOtpCode}
-          maximumCodeLength={4}
-          setIsPinReady={setIsPinReady}
-        />
-      </Container>
-    </>
-  );
-};
-
-const Loading = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <ActivityIndicator />
-    </View>
+    <Container>
+      <Stepper />
+
+      <View style={styles.topWrapper}>
+        <Text style={styles.title}>Enter the 4-digit code sent to you at</Text>
+        <Text style={styles.desc}>{phone}</Text>
+      </View>
+
+      <OTPInput
+        code={otpCode}
+        setCode={setOtpCode}
+        maximumCodeLength={4}
+        setIsPinReady={setIsPinReady}
+      />
+    </Container>
   );
 };
 

@@ -1,6 +1,6 @@
-import { Link } from "expo-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { useRouter } from "expo-router";
 
 import Colors from "../../../constants/Colors";
 import { TextStyles } from "../../../constants";
@@ -8,20 +8,53 @@ import { TextStyles } from "../../../constants";
 import { Stepper } from "./components/stepper";
 import { Select } from "../../../components/Select";
 import { Container } from "../../../components/Container";
-import { Text, View } from "../../../components/themed";
+import {
+  Text,
+  View,
+  TextInput,
+  KeyboardAvoidingView,
+} from "../../../components/themed";
+import { ScreenLoader } from "../../../components/ScreenLoader";
 
-const verificationMethod = [
-  "Driver Lisence",
-  "Passport",
-  "Medicare Card",
-  "Photo ID ",
+const fields = [
+  {
+    title: "Driver Lisence",
+    fields: ["License number", "State", "Expiry date"],
+  },
+  {
+    title: "Passport",
+    fields: ["Passport number", "Country", "Expiry date"],
+  },
+  {
+    title: "Medicare Card",
+    fields: ["Medicare number", "Expiry date"],
+  },
+  {
+    title: "Photo ID",
+    fields: ["ID number", "Expiry date"],
+  },
 ];
 
 export default () => {
+  const [isComplete, setIsComplete] = useState(false);
   const [values, setValues] = useState({
     verificationMethod: "",
     secondVerificationMethod: "",
   });
+
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (isComplete) {
+      setTimeout(() => {
+        push("/auth/verifyIdentity/final");
+      }, 1000);
+    }
+  }, [isComplete]);
+
+  if (isComplete) {
+    return <ScreenLoader />;
+  }
 
   return (
     <Container>
@@ -33,39 +66,62 @@ export default () => {
             We need two ID documents to verify your identity
           </Text>
 
-          <View style={styles.form}>
-            <Select
-              label="Select verification method"
-              selected={values.verificationMethod}
-              list={verificationMethod}
-              onSelect={(value) =>
-                setValues({ ...values, verificationMethod: value })
-              }
-            />
+          <KeyboardAvoidingView style={styles.form}>
+            <View style={{ gap: 24 }}>
+              <Select
+                label="Select verification method"
+                selected={values.verificationMethod}
+                list={fields.map((item) => item.title)}
+                onSelect={(value) =>
+                  setValues({ ...values, verificationMethod: value })
+                }
+              />
+
+              {values.verificationMethod &&
+                fields
+                  .find((item) => item.title === values.verificationMethod)
+                  ?.fields.map((field, i) => (
+                    <TextInput key={i} label={field} />
+                  ))}
+            </View>
 
             <View style={styles.divider} />
 
-            <Select
-              label="Select second verification method"
-              selected={values.verificationMethod}
-              list={verificationMethod}
-              onSelect={(value) =>
-                setValues({ ...values, secondVerificationMethod: value })
-              }
-            />
-          </View>
+            <View style={{ gap: 24 }}>
+              <Select
+                disabled={!values.verificationMethod}
+                label="Select second verification method"
+                selected={values.secondVerificationMethod}
+                list={fields
+                  .map((item) => item.title)
+                  .filter((item) => item !== values.verificationMethod)}
+                onSelect={(value) =>
+                  setValues({ ...values, secondVerificationMethod: value })
+                }
+              />
+
+              {values.secondVerificationMethod &&
+                fields
+                  .find(
+                    (item) => item.title === values.secondVerificationMethod,
+                  )
+                  ?.fields.map((field, i) => (
+                    <TextInput key={i} label={field} />
+                  ))}
+            </View>
+          </KeyboardAvoidingView>
         </View>
       </ScrollView>
-      <Link href="/auth/verifyIdentity/stepTwo" asChild>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={{
-            ...styles.button,
-          }}
-        >
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-      </Link>
+
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => setIsComplete(true)}
+        style={{
+          ...styles.button,
+        }}
+      >
+        <Text style={styles.buttonText}>Continue</Text>
+      </TouchableOpacity>
     </Container>
   );
 };

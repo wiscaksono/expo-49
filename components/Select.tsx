@@ -13,6 +13,7 @@ type SelectProps = {
   list: string[];
   onSelect?: (item: string) => void;
   selected: string;
+  disabled?: boolean;
 };
 
 export const Select = (props: SelectProps) => {
@@ -31,7 +32,12 @@ export const Select = (props: SelectProps) => {
       {label && <Text style={styles.label}>{label}</Text>}
 
       <TouchableOpacity
-        style={styles.button}
+        style={[
+          styles.button,
+          {
+            backgroundColor: props.disabled ? Colors.neutral[95] : "white",
+          },
+        ]}
         activeOpacity={0.8}
         onPress={openSheet}
       >
