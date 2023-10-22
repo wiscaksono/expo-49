@@ -30,7 +30,7 @@ function useProtectedRoute(user: User | null) {
     }
 
     if (user && inAuthGroup) {
-      router.replace("/dashboard/home");
+      router.replace("/dashboard/home/");
     }
   }, [user, segments]);
 }

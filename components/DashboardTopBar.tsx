@@ -1,19 +1,36 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { View } from "../components/themed";
+import { useSheet } from "../hooks/useSheet";
+import { View, Text } from "../components/themed";
+import { SheetEmpty } from "./Sheets/SheetEmpty";
 import { BlueBankSM } from "../assets/icons/blue-bank";
+
 import Colors from "../constants/Colors";
 import { TextStyles } from "../constants";
 
 export const DashboardTopBar = () => {
+  const { sheetRef, openSheet } = useSheet();
+
   return (
-    <View style={styles.container}>
-      <BlueBankSM />
-      <TouchableOpacity>
-        <Ionicons name="notifications-outline" size={24} color="#646464" />
-      </TouchableOpacity>
-    </View>
+    <>
+      <View style={styles.container}>
+        <BlueBankSM />
+        <TouchableOpacity onPress={openSheet}>
+          <Ionicons name="notifications-outline" size={24} color="#646464" />
+        </TouchableOpacity>
+      </View>
+      <SheetEmpty ref={sheetRef} snapPoint={["20%"]}>
+        <Text
+          style={{
+            ...TextStyles.TextHeading[3],
+            textAlign: "center",
+          }}
+        >
+          You are up to date! 🎉
+        </Text>
+      </SheetEmpty>
+    </>
   );
 };
 

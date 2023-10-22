@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -34,6 +35,7 @@ export default function RootLayout() {
 
   return (
     <BottomSheetModalProvider>
+      <StatusBar style="dark" />
       <AuthProvider>
         <Stack
           initialRouteName="dashboard"

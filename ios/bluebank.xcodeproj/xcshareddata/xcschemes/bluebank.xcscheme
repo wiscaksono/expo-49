@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "bluebank.app"
-               BlueprintName = "bluebank"
-               ReferencedContainer = "container:bluebank.xcodeproj">
+               BuildableName = "BlueBank.app"
+               BlueprintName = "BlueBank"
+               ReferencedContainer = "container:BlueBank.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "bluebankTests.xctest"
-               BlueprintName = "bluebankTests"
-               ReferencedContainer = "container:bluebank.xcodeproj">
+               BuildableName = "BlueBankTests.xctest"
+               BlueprintName = "BlueBankTests"
+               ReferencedContainer = "container:BlueBank.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "bluebank.app"
-            BlueprintName = "bluebank"
-            ReferencedContainer = "container:bluebank.xcodeproj">
+            BuildableName = "BlueBank.app"
+            BlueprintName = "BlueBank"
+            ReferencedContainer = "container:BlueBank.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "bluebank.app"
-            BlueprintName = "bluebank"
-            ReferencedContainer = "container:bluebank.xcodeproj">
+            BuildableName = "BlueBank.app"
+            BlueprintName = "BlueBank"
+            ReferencedContainer = "container:BlueBank.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
