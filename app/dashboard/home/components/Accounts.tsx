@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
   },
   totalBtnText: {
     textAlign: "center",
-    ...TextStyles.TextBody["2-sb"],
+    color: Colors.neutral[50],
+    ...TextStyles.TextBody["2"],
   },
 });
