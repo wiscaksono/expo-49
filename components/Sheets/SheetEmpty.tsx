@@ -15,10 +15,11 @@ import {
 type SheetProps = {
   snapPoint?: string[];
   children?: React.ReactNode;
+  onDismiss?: () => void;
 };
 
 export const SheetEmpty = forwardRef(
-  ({ snapPoint, children }: SheetProps, ref) => {
+  ({ snapPoint, children, onDismiss }: SheetProps, ref) => {
     const sheetRef = useRef<BottomSheetModal>(null);
 
     useImperativeHandle(ref, () => ({
@@ -43,6 +44,7 @@ export const SheetEmpty = forwardRef(
       <BottomSheetModal
         ref={sheetRef}
         snapPoints={snapPoints}
+        onDismiss={onDismiss}
         backdropComponent={renderBackdrop}
         enableDismissOnClose
         stackBehavior="replace"
