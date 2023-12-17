@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Button, Animated, Easing } from 'react-native'
+import { StyleSheet, Animated, Easing } from 'react-native'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 
 import { View, Text } from '../../../../components/themed'
-import { DashboardDetailTopBar } from '../../../../components/DashboardDetailTopBar'
+import { Header } from '../../../../components/Header'
 import { Container } from '../../../../components/Container'
 import { SheetEmpty } from '../../../../components/Sheets/SheetEmpty'
 
 import { useSheet } from '../../../../hooks/useSheet'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default () => {
   const [hasPermission, setHasPermission] = useState(false)
@@ -64,7 +63,7 @@ export default () => {
   return (
     <>
       <Container>
-        <DashboardDetailTopBar title='Scan QR' />
+        <Header title='Scan QR' />
         <View style={styles.container}>
           <View style={styles.scanLineContainer}>
             <Animated.View
